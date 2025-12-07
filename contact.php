@@ -8,14 +8,34 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Method Not Allowed');
 }
 
+// Honeypot spam check - if filled, it's a bot
+$honeypot = trim($_POST['website'] ?? '');
+if ($honeypot !== '') {
+    http_response_code(400);
+    exit('Spam detected.');
+}
+
 $name    = trim($_POST['name'] ?? '');
 $email   = trim($_POST['email'] ?? '');
 $track   = trim($_POST['track'] ?? '');
 $message = trim($_POST['message'] ?? '');
 
+// Sanitize against email header injection
+$name    = str_replace(["\r", "\n"], '', $name);
+$email   = str_replace(["\r", "\n"], '', $email);
+$track   = str_replace(["\r", "\n"], '', $track);
+
 if ($name === '' || $email === '' || $message === '') {
     http_response_code(400);
-    exit('Required fields missing.');
+    header('Location: error.html');
+    exit;
+}
+
+// Validate email format
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    header('Location: error.html');
+    exit;
 }
 
 $subject = "New RSAi inquiry: $track";
@@ -28,8 +48,8 @@ if (mail($to, $subject, $body, $headers)) {
     header('Location: thank-you.html');
     exit;
 } else {
-    http_response_code(500);
-    echo 'There was a problem sending your message.';
+    header('Location: error.html');
+    exit;
 }
 
 

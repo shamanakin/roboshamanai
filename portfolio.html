@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | RoboShaman AI</title>
-    <meta name="description" content="Selected works and projects by RoboShaman AI. Web design, automation systems, and multimedia production.">
+    <meta name="description" content="Selected works and projects by RoboShaman AI. Web design, workflow systems, and multimedia production.">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://roboshamanai.com/portfolio.html">
     <meta property="og:title" content="Portfolio | RoboShaman AI">
-    <meta property="og:description" content="Selected works and projects. Web design, automation systems, and multimedia production.">
-    <meta property="og:image" content="https://roboshamanai.com/assets/logo_general_rsai.png">
+    <meta property="og:description" content="Selected works and projects. Web design, workflow systems, and multimedia production.">
+    <meta property="og:image" content="https://roboshamanai.com/assets/rs_favicon_512_badge_mid.png">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@theroboshaman">
     <meta name="twitter:title" content="Portfolio | RoboShaman AI">
-    <meta name="twitter:description" content="Selected works and projects. Web design, automation systems, and multimedia production.">
-    <meta name="twitter:image" content="https://roboshamanai.com/assets/logo_general_rsai.png">
+    <meta name="twitter:description" content="Selected works and projects. Web design, workflow systems, and multimedia production.">
+    <meta name="twitter:image" content="https://roboshamanai.com/assets/rs_favicon_512_badge_mid.png">
     
     <!-- Canonical -->
     <link rel="canonical" href="https://roboshamanai.com/portfolio.html">
+    <link rel="icon" type="image/x-icon" href="assets/favicon_badge.ico">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/rs_favicon_512_badge_mid.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/rs_favicon_512_badge_mid.png">
     
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -179,6 +182,8 @@
     </style>
 </head>
 <body>
+    <!-- Skip link for keyboard accessibility -->
+    <a href="#capabilities" class="skip-link">Skip to main content</a>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -224,7 +229,7 @@
     </section>
 
     <!-- Skills / Breadth -->
-    <section class="section-padding" style="background: #fff;">
+    <section id="capabilities" class="section-padding" style="background: #fff;">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title fade-in-up">Capabilities</h2>
@@ -233,19 +238,24 @@
             
             <div class="bento-grid">
                 <div class="bento-card fade-in-up">
-                    <span class="card-icon">💻</span>
+                    <span class="card-icon" aria-hidden="true">💻</span>
                     <h3 class="card-title">Web & App Design</h3>
                     <p class="card-desc">Modern, responsive, and high-performance interfaces built with React, Next.js, and pure HTML/CSS mastery.</p>
                 </div>
                 <div class="bento-card fade-in-up" style="transition-delay: 0.1s;">
-                    <span class="card-icon">🎨</span>
+                    <span class="card-icon" aria-hidden="true">🛠️</span>
+                    <h3 class="card-title">Vibe Coding & AI Coaching</h3>
+                    <p class="card-desc">Side-by-side coaching to help you get more out of AI — from complete beginners to power-users. Whether you just want stronger everyday workflows or you're ready to cross into building tools, we turn your ideas into working systems at your pace.</p>
+                </div>
+                <div class="bento-card fade-in-up" style="transition-delay: 0.2s;">
+                    <span class="card-icon" aria-hidden="true">🎨</span>
                     <h3 class="card-title">Multimedia Asset Production</h3>
                     <p class="card-desc">High-end video editing, sound design, and visual asset creation for a cohesive brand narrative.</p>
                 </div>
-                <div class="bento-card fade-in-up" style="transition-delay: 0.2s;">
-                    <span class="card-icon">⚙️</span>
-                    <h3 class="card-title">Automation Systems</h3>
-                    <p class="card-desc">Connecting the dots with n8n, Zapier, and custom Python scripts to remove manual toil.</p>
+                <div class="bento-card fade-in-up" style="transition-delay: 0.3s;">
+                    <span class="card-icon" aria-hidden="true">⚙️</span>
+                    <h3 class="card-title">Workflow Design & Optimization</h3>
+                    <p class="card-desc">Mapping how you actually work and designing clear, streamlined workflows that reduce friction and make better use of the tools you already rely on.</p>
                 </div>
             </div>
         </div>
@@ -381,7 +391,7 @@
                 </a>
             </div>
             <div style="color: var(--text-muted); font-size: 0.9rem;">
-                &copy; 2025 RoboShaman AI.
+                &copy; 2025 RoboShaman AI. <a href="privacy.html" style="color: var(--text-muted); text-decoration: underline;">Privacy</a>
             </div>
         </div>
     </footer>

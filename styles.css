@@ -78,6 +78,36 @@ a {
     transition: all 0.2s ease;
 }
 
+/* Inline text links inside body copy */
+.text-link {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.text-link:hover {
+    color: var(--primary-dark);
+}
+
+/* Skip link for keyboard accessibility */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 10px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    z-index: 2000;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: 20px;
+}
+
 /* Container */
 .container {
     width: 100%;

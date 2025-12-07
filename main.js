@@ -88,10 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Smooth Scroll for Anchors ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            // Only scroll if it's an anchor on the same page
-            if (this.getAttribute('href').startsWith('#')) {
+            const href = this.getAttribute('href');
+            // Only scroll if it's a pure anchor on the same page (not query+hash combos)
+            if (href.startsWith('#') && !href.includes('?')) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',

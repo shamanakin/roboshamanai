@@ -12,12 +12,12 @@ Turn your vision into shipped reality. We bridge the gap between "Dreaming" and 
 
 ## What is RSAi?
 
-RoboShaman AI is a productized service for solo entrepreneurs, coaches, therapists, and startup founders who have the vision but need help with execution. We offer three tiers of engagement:
+RoboShaman AI is a productized service for solo entrepreneurs, coaches, therapists, and startup founders who have the vision but need help with execution. Three ways to engage:
 
 | Service | Description | Pricing |
 |---------|-------------|---------|
 | **BUILD** | Done-for-you websites, apps, brand identity, and content systems | Custom-quoted |
-| **LEARN** | 1-on-1 AI coaching to optimize your workflow and tools | $150/hour |
+| **LEARN** | Vibe Coding & AI Coaching — for power-users who want to cross into building | $150/hour |
 | **MAP** | Strategy audit with actionable 30-day roadmap | $297 flat fee |
 
 ---
@@ -59,16 +59,16 @@ roboshamanai/
 ## Features
 
 ### Landing Page (`index.html`)
-- **Hero** with micro-personas (solo creator, coach, startup founder, AI enthusiast)
+- **Hero** with micro-personas (solo creator, coach/therapist, startup founder, AI power-user)
 - **Problem framing** — The Skill/Time/Clarity gaps
-- **Services** — Triangle of Scale with pricing and outcomes
+- **Services** — BUILD (primary), LEARN (Vibe Coding & AI Coaching), MAP
 - **Social proof** — Case study from BrightEyedTherapist SaaS
 - **About** — Therapist-developer differentiator
 - **Pricing philosophy** — Transparent, flexible, no surprises
 - **Contact form** — With 24-48hr response promise
 
 ### Portfolio Page (`portfolio.html`)
-- **Capabilities overview** — Web, multimedia, automation
+- **Capabilities overview** — Web, Vibe Coding, multimedia, workflow design
 - **Methodology** — Discovery → Prototype → Ship → Refine
 - **Shipped projects:**
   - BrightEyedTherapist (SaaS)
@@ -124,4 +124,6 @@ MIT License — see [LICENSE](LICENSE) for details.
   <strong>Built with AI. Shipped by humans.</strong><br>
   <a href="https://roboshamanai.com">roboshamanai.com</a>
 </p>
+
+
 
