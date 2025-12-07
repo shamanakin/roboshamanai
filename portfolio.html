@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | RoboShaman AI</title>
+    <meta name="description" content="Selected works and projects by RoboShaman AI. Web design, automation systems, and multimedia production.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roboshamanai.com/portfolio.html">
+    <meta property="og:title" content="Portfolio | RoboShaman AI">
+    <meta property="og:description" content="Selected works and projects. Web design, automation systems, and multimedia production.">
+    <meta property="og:image" content="https://roboshamanai.com/assets/logo_general_rsai.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@theroboshaman">
+    <meta name="twitter:title" content="Portfolio | RoboShaman AI">
+    <meta name="twitter:description" content="Selected works and projects. Web design, automation systems, and multimedia production.">
+    <meta name="twitter:image" content="https://roboshamanai.com/assets/logo_general_rsai.png">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://roboshamanai.com/portfolio.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Portfolio specific overrides */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-preview {
+            height: 180px;
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            background: var(--bg-page);
+            border-radius: 100px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .project-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        .project-preview-image {
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .project-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-preview-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-note {
+            display: inline-block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        /* Approach Steps */
+        .approach-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 40px 20px;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-light);
+        }
+        
+        .approach-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .step-content h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+            color: var(--text-primary);
+        }
+        
+        .step-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .approach-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+        
+        @media (max-width: 900px) {
+            .approach-steps {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .approach-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo-text">RSAi</a>
+        <div class="nav-links">
+            <a href="index.html#problem" class="nav-link">The Gap</a>
+            <a href="index.html#services" class="nav-link">Services</a>
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="portfolio.html" class="nav-link" style="color: var(--primary);">Portfolio</a>
+        </div>
+        <a href="index.html#deploy" class="btn-nav btn desktop-only">Get Started</a>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </nav>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" aria-hidden="true">
+        <div class="mobile-nav-content">
+            <a href="index.html#problem" class="mobile-nav-link">The Gap</a>
+            <a href="index.html#services" class="mobile-nav-link">Services</a>
+            <a href="index.html#about" class="mobile-nav-link">About</a>
+            <a href="portfolio.html" class="mobile-nav-link" style="color: var(--primary);">Portfolio</a>
+            <a href="index.html#deploy" class="btn mobile-nav-cta">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <span class="hero-tag">Selected Works</span>
+            <h1 class="hero-title">
+                Digital Craftsmanship<br>
+                <span>Across the Stack</span>
+            </h1>
+            <p class="hero-subtitle">
+                From full-stack applications to immersive multimedia experiences. 
+                A showcase of what happens when vision meets execution.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills / Breadth -->
+    <section class="section-padding" style="background: #fff;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in-up">Capabilities</h2>
+                <p class="section-desc fade-in-up">We don't just write code. We build ecosystems.</p>
+            </div>
+            
+            <div class="bento-grid">
+                <div class="bento-card fade-in-up">
+                    <span class="card-icon">💻</span>
+                    <h3 class="card-title">Web & App Design</h3>
+                    <p class="card-desc">Modern, responsive, and high-performance interfaces built with React, Next.js, and pure HTML/CSS mastery.</p>
+                </div>
+                <div class="bento-card fade-in-up" style="transition-delay: 0.1s;">
+                    <span class="card-icon">🎨</span>
+                    <h3 class="card-title">Multimedia Asset Production</h3>
+                    <p class="card-desc">High-end video editing, sound design, and visual asset creation for a cohesive brand narrative.</p>
+                </div>
+                <div class="bento-card fade-in-up" style="transition-delay: 0.2s;">
+                    <span class="card-icon">⚙️</span>
+                    <h3 class="card-title">Automation Systems</h3>
+                    <p class="card-desc">Connecting the dots with n8n, Zapier, and custom Python scripts to remove manual toil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach -->
+    <section class="section-padding">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header">
+                <h2 class="section-title fade-in-up">The Approach</h2>
+                <p class="section-desc fade-in-up">Every project follows the same pattern.</p>
+            </div>
+            
+            <div class="approach-steps fade-in-up">
+                <div class="approach-step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <h4>Discovery</h4>
+                        <p>Understand the real problem</p>
+                    </div>
+                </div>
+                <div class="approach-arrow">→</div>
+                <div class="approach-step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <h4>Prototype</h4>
+                        <p>Build the minimum viable version</p>
+                    </div>
+                </div>
+                <div class="approach-arrow">→</div>
+                <div class="approach-step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <h4>Ship</h4>
+                        <p>Deploy and get feedback</p>
+                    </div>
+                </div>
+                <div class="approach-arrow">→</div>
+                <div class="approach-step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <h4>Refine</h4>
+                        <p>Iterate based on reality</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section-padding" style="background: #fff;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title fade-in-up">Shipped Projects</h2>
+                <p class="section-desc fade-in-up">Real work, live links, actual results.</p>
+            </div>
+
+            <div class="project-grid fade-in-up">
+                <!-- Project 1: BrightEyedTherapist -->
+                <div class="project-card">
+                    <div class="project-preview project-preview-image" style="background: #F9FAFB;">
+                        <img src="assets/logo_betowl.png" alt="BrightEyedTherapist owl logo">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Full-Stack</span>
+                            <span class="tag">SaaS</span>
+                            <span class="tag">PHP</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">BrightEyedTherapist</h3>
+                        <p class="project-desc">Subscription-based clinical tools with user auth, Stripe integration, and a suite of single-file therapeutic web apps.</p>
+                        <a href="https://brighteyedtherapist.com" target="_blank" rel="noopener noreferrer" class="project-link">View Live Site →</a>
+                    </div>
+                </div>
+                
+                <!-- Project 2: EMDR Suite -->
+                <div class="project-card">
+                    <div class="project-preview project-preview-image">
+                        <img src="assets/screenshot_emdrapp.png" alt="EMDR Suite interface showing bilateral stimulation lightbar">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Clinical Tool</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">UX</span>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">EMDR Suite</h3>
+                        <p class="project-desc">Browser-based EMDR tool with customizable speed, colors, patterns, and audio — designed by a therapist for therapists.</p>
+                        <span class="project-note">Available via BrightEyedTherapist subscription</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3: This Site -->
+                <div class="project-card">
+                    <div class="project-preview project-preview-image">
+                        <img src="assets/logo_general_rsai.png" alt="RoboShaman AI logo">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Vibe Coding</span>
+                            <span class="tag">HTML/CSS/JS</span>
+                            <span class="tag">Build in Public</span>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">RoboShaman AI</h3>
+                        <p class="project-desc">This very website — designed, coded, and deployed using AI-assisted development. View the source and watch it evolve.</p>
+                        <a href="https://github.com/shamanakin/roboshamanai" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <div class="logo-text">RSAi</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">The Execution Engine for Solo Entrepreneurs.</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://x.com/theroboshaman" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="Follow us on X (Twitter)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://github.com/shamanakin" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="View our GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61579770693129" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="Follow us on Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://linktr.ee/roboshaman" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="View all links on Linktree">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.953 15.066l-.038-4.024 4.044-.022v12.98h.038l4.09-.02V11.02l4.044.022.021-4.024H11.959V2.556h4.09L12.049 0 7.953 2.556V7.02H3.908l.021 4.024 4.044-.022-.02 4.044z"/></svg>
+                </a>
+            </div>
+            <div style="color: var(--text-muted); font-size: 0.9rem;">
+                &copy; 2025 RoboShaman AI.
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
+
