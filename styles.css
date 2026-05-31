@@ -805,22 +805,44 @@ a {
 .proof-visuals {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     margin-bottom: 24px;
 }
 
 .proof-visual-frame {
     border: 1px solid var(--border-light);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--bg-page);
     margin: 0;
+    box-shadow: var(--shadow-md);
 }
 
-.proof-visual-frame img {
+.proof-visual-frame--etsy {
+    width: 100%;
+}
+
+.proof-visual-frame--etsy img {
     display: block;
     width: 100%;
     height: auto;
+}
+
+.proof-visual-frame--pinterest {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.proof-visual-frame--pinterest img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 700 / 1079;
+}
+
+.proof-visual-frame--pinterest .proof-visual-caption {
+    text-align: left;
 }
 
 .proof-visual-caption {

@@ -181,30 +181,8 @@
             background: var(--bg-page);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 24px;
             align-items: stretch;
-        }
-
-        .project-preview--proof-stack .proof-visual-frame {
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            margin: 0;
-        }
-
-        .project-preview--proof-stack .proof-visual-frame img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .project-preview--proof-stack .proof-visual-caption {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-style: italic;
-            padding: 8px 12px;
-            line-height: 1.4;
-            border-top: 1px solid var(--border-light);
         }
 
         .project-card--featured {
@@ -418,12 +396,12 @@
                 <!-- Project 0: Maris Dreaming (Featured) -->
                 <div class="project-card project-card--featured">
                     <div class="project-preview project-preview--proof-stack">
-                        <figure class="proof-visual-frame">
-                            <img src="assets/maris-pinterest-analytics.png" alt="Pinterest Analytics Overview for Maris Dreaming — 74.7K impressions in 30 days" width="700" loading="lazy">
-                            <figcaption class="proof-visual-caption">Real Pinterest analytics (30-day window). The "&gt;999%" is Pinterest's capped growth display against a near-zero prior month — the absolute reach is the story.</figcaption>
+                        <figure class="proof-visual-frame proof-visual-frame--etsy">
+                            <img src="assets/maris-etsy-shop.webp" alt="Maris Dreaming Etsy storefront — 5.0★, 10 sales" width="1100" height="369" loading="lazy">
                         </figure>
-                        <figure class="proof-visual-frame">
-                            <img src="assets/maris-etsy-shop.webp" alt="Maris Dreaming Etsy storefront — 5.0★, 10 sales" width="1100" loading="lazy">
+                        <figure class="proof-visual-frame proof-visual-frame--pinterest">
+                            <img src="assets/maris-pinterest-analytics.png" alt="Pinterest Analytics Overview for Maris Dreaming — 74.7K impressions in 30 days" width="700" height="1079" loading="lazy">
+                            <figcaption class="proof-visual-caption">Real Pinterest analytics (30-day window). The "&gt;999%" is Pinterest's capped growth display against a near-zero prior month — the absolute reach is the story.</figcaption>
                         </figure>
                     </div>
                     <div class="project-content">
