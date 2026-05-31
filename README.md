@@ -1,8 +1,8 @@
 # RoboShaman AI
 
-**The AI Execution Engine for Solo Entrepreneurs**
+**Part guide, part builder. Therapist-led AI consulting.**
 
-Turn your vision into shipped reality. We bridge the gap between "Dreaming" and "Done" using advanced AI.
+I'm a psychotherapist who also builds software — for helping-professionals and neurodivergent solo operators whose blocker is psychological / executive-function as much as technical.
 
 🌐 **Live Site:** [roboshamanai.com](https://roboshamanai.com)  
 🐦 **Twitter/X:** [@theroboshaman](https://x.com/theroboshaman)  
@@ -12,26 +12,26 @@ Turn your vision into shipped reality. We bridge the gap between "Dreaming" and 
 
 ## What is RSAi?
 
-RoboShaman AI is a productized service for solo entrepreneurs, coaches, therapists, and startup founders who have the vision but need help with execution. Three ways to engage:
+RoboShaman AI is therapist-led consulting for solo operators who stall before the finish. Three ways in — MAP routes you to the right one:
 
-| Service | Description | Pricing |
-|---------|-------------|---------|
-| **BUILD** | Done-for-you websites, apps, brand identity, and content systems | Custom-quoted |
-| **LEARN** | Vibe Coding & AI Coaching — for power-users who want to cross into building | $150/hour |
-| **MAP** | Strategy audit with actionable 30-day roadmap | $297 flat fee |
+| Motion | Description | Pricing |
+|--------|-------------|---------|
+| **MAP** | Strategy audit — the router that tells us whether you need coaching or a build | $297 flat fee |
+| **LEARN** | Coaching & vibe coding — done-with-you on your real projects | $150/hour |
+| **BUILD** | Done-for-you websites, apps, brand systems, and automation | Custom-quoted |
 
 ---
 
 ## Built in Public
 
-This repository contains the full source code for [roboshamanai.com](https://roboshamanai.com). The entire site was designed, coded, and deployed using AI-assisted development — practicing what we preach.
+This repository contains the full source code for [roboshamanai.com](https://roboshamanai.com). Designed, coded, and deployed using AI-assisted development — practicing what we preach.
 
 ### Tech Stack
 
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **Backend:** PHP (contact form)
-- **Fonts:** Outfit (headings) + Inter (body) via Google Fonts
-- **Design System:** Glassmorphism with indigo/emerald accents
+- **Backend:** PHP (contact form only)
+- **Fonts:** DM Serif Display (headings) + Source Sans 3 (body) via Google Fonts
+- **Design:** Warm editorial palette — burnt amber accent (`#c2410c`), warm off-white ground (`#FAF9F7`). Anti-slop: no Inter, no purple gradients, no three-box cliché.
 - **Hosting:** Static files + PHP on DreamHost
 
 No frameworks. No build tools. Just clean, performant code.
@@ -42,16 +42,22 @@ No frameworks. No build tools. Just clean, performant code.
 
 ```
 roboshamanai/
-├── index.html          # Main landing page
-├── portfolio.html      # Project showcase
+├── index.html          # Main landing page (Shaman-forward)
+├── portfolio.html      # Proof portfolio + case studies
 ├── styles.css          # Global styles + design system
-├── main.js             # Scroll effects, mobile nav, animations
+├── main.js             # Mobile nav, motion-gated animations
 ├── contact.php         # Form handler
 ├── thank-you.html      # Post-submission page
+├── privacy.html        # Privacy policy
+├── error.html          # Error page
+├── robots.txt
+├── sitemap.xml
 └── assets/
-    ├── logo_general_rsai.png    # RSAi brand logo
-    ├── logo_betowl.png          # BrightEyedTherapist logo
-    └── screenshot_emdrapp.png   # EMDR Suite preview
+    ├── matthew-headshot.webp
+    ├── matthew-headshot-hero.webp
+    ├── logo_general_rsai.png
+    ├── logo_betowl.png
+    └── screenshot_emdrapp.png
 ```
 
 ---
@@ -59,58 +65,59 @@ roboshamanai/
 ## Features
 
 ### Landing Page (`index.html`)
-- **Hero** with micro-personas (solo creator, coach/therapist, startup founder, AI power-user)
-- **Problem framing** — The Skill/Time/Clarity gaps
-- **Services** — BUILD (primary), LEARN (Vibe Coding & AI Coaching), MAP
-- **Social proof** — Case study from BrightEyedTherapist SaaS
-- **About** — Therapist-developer differentiator
-- **Pricing philosophy** — Transparent, flexible, no surprises
-- **Contact form** — With 24-48hr response promise
+- **Hero** — therapist-who-builds message, 3 niche personas, honest proof chip
+- **The Real Block** — Clarity / Execution / Capacity blocks
+- **The Moat** — therapist-guide differentiator (promoted above offers)
+- **Work With Me** — MAP → LEARN → BUILD (MAP leads)
+- **Proof** — Maris client case study featured; BrightEyedTherapist + DECODER secondary
+- **About** — founder photo, first-person copy
+- **Contact** — warm form with honeypot spam protection
 
 ### Portfolio Page (`portfolio.html`)
-- **Capabilities overview** — Web, Vibe Coding, multimedia, workflow design
-- **Methodology** — Discovery → Prototype → Ship → Refine
-- **Shipped projects:**
-  - BrightEyedTherapist (SaaS)
-  - EMDR Suite (clinical tool)
-  - This site (meta!)
+- **Capabilities** — geometric icons (no emoji)
+- **Shipped projects** — Maris Dreaming (featured), BrightEyedTherapist, EMDR Suite, DECODER, this site
 
 ### Technical Features
 - Mobile-responsive with hamburger navigation
-- Scroll-triggered fade-in animations
+- Scroll-triggered fade-ins gated behind `prefers-reduced-motion`
+- `<noscript>` fallback — content visible without JavaScript
 - SEO meta tags (Open Graph, Twitter Cards, structured data)
-- Accessible (ARIA labels, semantic HTML)
+- Accessible (skip link, focus rings, ARIA labels, semantic HTML)
 
 ---
 
 ## Local Development
 
 ```bash
-# Clone the repo
 git clone https://github.com/shamanakin/roboshamanai.git
 cd roboshamanai
+python3 -m http.server 8080
+# → http://localhost:8080/index.html
 
-# Open in browser (no server needed for frontend)
-open index.html
-
-# For contact form testing, use a local PHP server
+# Contact form testing requires PHP:
 php -S localhost:8000
 ```
 
 ---
 
-## The Human Behind the Code
+## Deploy (DreamHost)
 
-RSAi is led by a practicing psychotherapist who built his own successful private practice and SaaS ([BrightEyedTherapist](https://brighteyedtherapist.com)) using these exact methods.
+GitHub push is version control only — live deploy is a separate rsync/SCP push:
 
-> "Years of training in understanding how people get stuck — and unstuck — didn't disappear when I started building software. I translate complicated technical concepts into plain language, help you identify what's actually blocking progress, and build systems that match how you actually work."
+```bash
+rsync -avz --exclude '.git' --exclude '.DS_Store' --exclude 'README.md' --exclude 'plan.suggestions.md' \
+  ./ shamanakin@roboshamanai.com:~/roboshamanai.com/
+```
+
+See `../Deployment Instructions/DEPLOY-SSH.md` for credentials and paths.
 
 ---
 
 ## Related Projects
 
 - **[BrightEyedTherapist](https://brighteyedtherapist.com)** — Subscription-based clinical tools for therapists
-- **[shamanakin](https://github.com/shamanakin)** — More open-source therapy tools and experiments
+- **[DECODER](https://decoder.roboshamanai.com)** — AI reality-analysis with confidence tiers
+- **[GitHub](https://github.com/shamanakin)** — Open-source therapy tools and experiments
 
 ---
 
@@ -121,9 +128,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <strong>Built with AI. Shipped by humans.</strong><br>
+  <strong>Part guide, part builder.</strong><br>
   <a href="https://roboshamanai.com">roboshamanai.com</a>
 </p>
-
-
-

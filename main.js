@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // --- Navbar Scroll Effect ---
     const navbar = document.querySelector('.navbar');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -10,24 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.remove('scrolled');
         }
     });
-    
+
     // --- Mobile Navigation Toggle ---
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta');
-    
+
     if (mobileMenuBtn && mobileNavOverlay) {
         mobileMenuBtn.addEventListener('click', () => {
             const isActive = mobileMenuBtn.classList.toggle('active');
             mobileNavOverlay.classList.toggle('active');
             mobileMenuBtn.setAttribute('aria-expanded', isActive);
             mobileNavOverlay.setAttribute('aria-hidden', !isActive);
-            
-            // Prevent body scroll when menu is open
             document.body.style.overflow = isActive ? 'hidden' : '';
         });
-        
-        // Close menu when clicking a link
+
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuBtn.classList.remove('active');
@@ -37,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             });
         });
-        
-        // Close menu on escape key
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mobileNavOverlay.classList.contains('active')) {
                 mobileMenuBtn.classList.remove('active');
@@ -50,52 +47,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Intersection Observer for Fade-ins ---
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
+    // --- Intersection Observer for Fade-ins (motion allowed only) ---
+    if (!prefersReducedMotion) {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Animate only once
-            }
-        });
-    }, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-    const animatedElements = document.querySelectorAll('.fade-in-up');
-    animatedElements.forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    }
 
-    // --- Hero Content Animation on Load ---
-    setTimeout(() => {
-        const heroContent = document.querySelector('.hero-content');
-        if (heroContent) {
-            // Ensure initial state is set in CSS or handle here
-            heroContent.style.opacity = '0';
-            heroContent.style.transform = 'translateY(20px)';
-            
-            // Trigger reflow
-            void heroContent.offsetWidth;
-            
-            heroContent.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-            heroContent.style.opacity = '1';
-            heroContent.style.transform = 'translateY(0)';
-        }
-    }, 100);
-
-    // --- Smooth Scroll for Anchors ---
+    // --- Smooth Scroll for Anchors (respect reduced motion) ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            // Only scroll if it's a pure anchor on the same page (not query+hash combos)
             if (href.startsWith('#') && !href.includes('?')) {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
-                        behavior: 'smooth',
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
                         block: 'start'
                     });
                 }
@@ -115,14 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (trackParam && trackSelect) {
         if ([...trackSelect.options].some(option => option.value === trackParam)) {
             trackSelect.value = trackParam;
-            
+
             const deploySection = document.getElementById('deploy');
             if (deploySection) {
                 setTimeout(() => {
-                    deploySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 500);
+                    deploySection.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'center'
+                    });
+                }, prefersReducedMotion ? 0 : 500);
             }
         }
     }
 });
-
