@@ -803,16 +803,33 @@ a {
 }
 
 .proof-visuals {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     margin-bottom: 24px;
 }
 
-@media (min-width: 640px) {
-    .proof-visuals {
-        grid-template-columns: 1fr 1fr;
-    }
+.proof-visual-frame {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-page);
+    margin: 0;
+}
+
+.proof-visual-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.proof-visual-caption {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 10px 14px;
+    line-height: 1.45;
+    border-top: 1px solid var(--border-light);
 }
 
 .proof-visual-placeholder {
