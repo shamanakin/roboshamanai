@@ -2,12 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://roboshamanai.com/</loc>
+    <lastmod>2026-05-31</lastmod>
   </url>
   <url>
     <loc>https://roboshamanai.com/portfolio.html</loc>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://roboshamanai.com/work-maris.html</loc>
+    <lastmod>2026-05-31</lastmod>
   </url>
   <url>
     <loc>https://roboshamanai.com/privacy.html</loc>
+    <lastmod>2026-05-31</lastmod>
   </url>
 </urlset>
-

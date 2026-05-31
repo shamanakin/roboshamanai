@@ -854,6 +854,49 @@ a {
     border-top: 1px solid var(--border-light);
 }
 
+.approach-steps-inline p {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+/* FAQ */
+.faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    background: var(--bg-card);
+}
+
+.faq-item summary {
+    padding: 18px 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+    border-radius: var(--radius-md);
+}
+
+.faq-answer {
+    padding: 0 22px 18px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
 .proof-visual-placeholder {
     min-height: 140px;
     background: var(--bg-page);
