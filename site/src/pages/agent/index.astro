@@ -1,0 +1,13 @@
+---
+import Base from "../../layouts/Base.astro";
+import AgentDoc from "../../components/AgentDoc.astro";
+import { agentDocs } from "../../lib/agent";
+
+const doc = (await agentDocs()).find((item) => item.path === "");
+if (!doc) throw new Error("Missing agent index");
+const description = "Machine-readable mirror of the lab: projects, research, resources, and contact.";
+---
+
+<Base title="Agent view" description={description} path="/agent/" mode="agent">
+  <AgentDoc title={doc.title} markdown={doc.markdown} human={doc.human} raw="/agent.md" />
+</Base>

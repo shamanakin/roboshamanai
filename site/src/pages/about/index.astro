@@ -1,0 +1,58 @@
+---
+import Base from "../../layouts/Base.astro";
+import { contact, links, site } from "../../data/site";
+import { graph } from "../../lib/jsonld";
+
+const open = contact.status === "open";
+const description = "Matthew Heake, the lab, the one contact line, and how this site is built.";
+---
+
+<Base title="About" description={description} path="/about/" jsonLd={graph()}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">About</p>
+      <h1>Matthew Heake</h1>
+    </header>
+    <div class="about-grid">
+      <img class="portrait" src="/media/matthew.webp" width="640" height="960" alt="Portrait of Matthew Heake" />
+      <div class="prose">
+        <p>Matthew Heake builds software and publishes research in the open, at the seam of mind and machine. The lab has three nouns: projects, research, and resources. There is no offer ladder on this site.</p>
+        <p class="footnote" id="credential">{site.credential}</p>
+        <p class="note">That line lives here, and in the site's structured data. It is not the headline.</p>
+      </div>
+    </div>
+
+    <section class="block" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">The single contact</h2>
+      <p>
+        <span class={`dot${open ? "" : " closed"}`} aria-hidden="true"></span>
+        <strong>Commissions &amp; consults:</strong> {contact.line}
+      </p>
+      <p><a href={`mailto:${contact.email}`}>{contact.email}</a> <span class="muted">· status: {open ? "open" : "closed"}</span></p>
+      <p class="note">No form, no prices, and no call-booking funnel. GitHub and X are the only social links.</p>
+    </section>
+
+    <section class="block" id="colophon" aria-labelledby="colophon-heading">
+      <h2 id="colophon-heading">Colophon</h2>
+      <div class="prose">
+        <p>This site is a static Astro build. The intended host is Cloudflare Pages, with the project root set to <code>site</code>. The previous PHP site remains in the repository until launch.</p>
+        <p>Type is self-hosted: Mona Sans (weight and width), Newsreader (weight; optical size pinned so the font files stay small), and JetBrains Mono. No Google Fonts, no analytics, no third-party scripts. Calm mode is a flag in localStorage on your machine.</p>
+        <p>The Lens is a WebGL2 shader with a Canvas2D fallback. It is decoration. The headline is real text in the page. Reduced motion and Calm skip the cipher.</p>
+        <p>Code is <a href={links.codeLicense}>MIT</a>. Writing is <a href={links.writingLicense}>CC BY 4.0</a> unless a page says otherwise. Source: <a href={links.repo}>github.com/shamanakin/roboshamanai</a>.</p>
+        <p>DECODER stays on its own subdomain and is only linked, never framed. Atlas, the graph of the lab, is phase 2.</p>
+      </div>
+    </section>
+
+    <section class="block" id="privacy" aria-labelledby="privacy-heading">
+      <h2 id="privacy-heading">Privacy</h2>
+      <div class="prose">
+        <p>This site does not ask you to fill in a form. There is no account, no newsletter, and no payment. If you email {contact.email}, that message is ordinary email. I use it to reply. I don't sell it, and I don't add you to a list.</p>
+        <p>There are no analytics beacons, no cookies, and no third-party scripts or fonts. Calm mode stores a single flag, <code>calm</code>, in localStorage on your device. Clearing site data removes it.</p>
+        <p>This site does not track you, so a Do Not Track signal changes nothing. There is no tracker to disable.</p>
+        <p>DECODER, GitHub, X, and any project linked out from here are other sites. They have their own practices. This page does not control them.</p>
+        <p>To ask a question about this, or to ask that an email you sent be deleted, write to <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
+        <p>Security contact: <a href="/.well-known/security.txt">security.txt</a>.</p>
+      </div>
+    </section>
+  </main>
+</Base>

@@ -1,0 +1,22 @@
+---
+import Base from "../../layouts/Base.astro";
+import { graph } from "../../lib/jsonld";
+
+const description = "Phase 2. A graph of projects, research, and DECODER principles is not built yet.";
+---
+
+<Base title="Atlas" description={description} path="/atlas/" jsonLd={graph()}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">Atlas · phase 2</p>
+      <h1>Not built yet</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <p>Until then, the catalogs are separate:</p>
+    <ul>
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="https://decoder.roboshamanai.com" rel="noopener noreferrer">DECODER ↗</a></li>
+    </ul>
+  </main>
+</Base>

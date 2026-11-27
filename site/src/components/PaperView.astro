@@ -1,0 +1,104 @@
+---
+import { render } from "astro:content";
+import {
+  authorshipLabel,
+  formatDate,
+  researchKindLabel,
+  tierLabel,
+  trackLabel,
+} from "../data/site";
+import { apaCitation, bibtexCitation, citeUrl } from "../lib/cite";
+import { researchPath, versionPath, type Paper } from "../lib/content";
+
+interface Props {
+  paper: Paper;
+  version?: string;
+}
+const { paper, version } = Astro.props;
+const current = version ?? paper.data.version;
+const isCurrent = current === paper.data.version;
+const change = paper.data.changelog.find((item) => item.version === current);
+const { Content } = isCurrent ? await render(paper) : { Content: null };
+const apa = apaCitation(paper);
+const bib = bibtexCitation(paper);
+const banner =
+  paper.data.banner ??
+  "Draft. This entry is a placeholder. It is not a published finding.";
+---
+
+<article class="wrap">
+  {paper.data.draft && (
+    <p class="banner" role="note"><strong>DRAFT</strong> {banner}</p>
+  )}
+  <header class="page-head">
+    <p class="mono eyebrow">{paper.data.idCode} · v{current}</p>
+    <h1 class="vt-target">{paper.data.title}</h1>
+    <p class="lede">{paper.data.abstract}</p>
+    <div class="meta-row">
+      <span class={`chip tier-${paper.data.tier}`}>{tierLabel[paper.data.tier]}</span>
+      <span class="chip auth">{authorshipLabel[paper.data.authorship]}</span>
+      <span class="chip hosted">{researchKindLabel[paper.data.kind]}</span>
+      <span class="mono">{trackLabel[paper.data.track]}</span>
+      <span class="mono">Updated {formatDate(paper.data.updated)}</span>
+    </div>
+    {paper.data.domains.length > 0 && (
+      <p class="shelf">
+        {paper.data.domains.map((domain) => <span>{domain}</span>)}
+      </p>
+    )}
+  </header>
+
+  {paper.data.notClinicalAdvice && (
+    <p class="note">Not clinical advice. This lab does not publish case material or treatment guidance.</p>
+  )}
+
+  {!isCurrent && (
+    <div class="prose">
+      <h2>What changed</h2>
+      <p>{change?.note ?? "No change note was recorded for this version."}</p>
+      <p>A full snapshot of this older text was not archived separately. The living page is the current text.</p>
+      <p><a href={researchPath(paper.id)}>Read the current version</a></p>
+    </div>
+  )}
+
+  {isCurrent && Content && (
+    <div class="prose">
+      <Content />
+    </div>
+  )}
+
+  {isCurrent && paper.data.aiLog && (
+    <section class="prose" aria-labelledby="ai-log">
+      <h2 id="ai-log">AI method log</h2>
+      <p>{paper.data.aiLog}</p>
+    </section>
+  )}
+
+  <section aria-labelledby="versions">
+    <h2 id="versions">Versions</h2>
+    <ul class="version-list">
+      {paper.data.changelog.map((item) => (
+        <li>
+          <a href={versionPath(paper.id, item.version)} class="mono">v{item.version}</a>
+          <span class="muted"> — {item.note}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="note">Permanent link for v{paper.data.version}: <a href={citeUrl(paper)}>{citeUrl(paper)}</a></p>
+    <p class="note">DOI: not assigned. A Zenodo DOI would need a separate account and is not part of this draft.</p>
+  </section>
+
+  {isCurrent && (
+    <section class="cite" aria-labelledby="cite">
+      <h2 id="cite">Cite this</h2>
+      <div>
+        <button class="btn" type="button" data-copy="apa-cite">Copy APA</button>
+        <pre id="apa-cite">{apa}</pre>
+      </div>
+      <div>
+        <button class="btn" type="button" data-copy="bib-cite">Copy BibTeX</button>
+        <pre id="bib-cite">{bib}</pre>
+      </div>
+    </section>
+  )}
+</article>

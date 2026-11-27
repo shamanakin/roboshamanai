@@ -1,0 +1,17 @@
+<div id="palette" class="palette" hidden>
+  <button class="palette-backdrop" type="button" aria-label="Close search"></button>
+  <div id="palette-panel" class="palette-panel glass-static" role="dialog" aria-modal="true" aria-labelledby="palette-label">
+    <h2 id="palette-label" class="sr-only">Search the lab</h2>
+    <input
+      id="palette-input"
+      type="search"
+      placeholder="Projects, research, resources, DECODER"
+      aria-label="Search"
+      aria-controls="palette-list"
+      aria-autocomplete="list"
+      autocomplete="off"
+    />
+    <ul id="palette-list" class="palette-list" role="listbox"></ul>
+    <p class="palette-hint mono muted">esc closes · ↑↓ moves · enter opens</p>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { absolute, links } from "../../data/site";
+import { graph } from "../../lib/jsonld";
+import { getResources, resourcePath } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const resources = await getResources();
+  return resources.map((resource) => ({ params: { slug: resource.id }, props: { resource } }));
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+const path = resourcePath(resource.id);
+const licenceUrl = resource.data.licence === "MIT" ? links.codeLicense : links.writingLicense;
+---
+
+<Base
+  title={resource.data.title}
+  description={resource.data.summary}
+  path={path}
+  jsonLd={graph({
+    "@type": "CreativeWork",
+    name: resource.data.title,
+    description: resource.data.summary,
+    license: licenceUrl,
+    creativeWorkStatus: resource.data.draft ? "Draft" : "Published",
+    url: absolute(path),
+  })}
+>
+  <main id="main" class="page wrap" tabindex="-1">
+    {resource.data.draft && (
+      <p class="banner" role="note"><strong>DRAFT</strong> Nothing here is a finished handout yet.</p>
+    )}
+    <header class="page-head">
+      <p class="mono eyebrow">Resources</p>
+      <h1>{resource.data.title}</h1>
+      <p class="lede">{resource.data.summary}</p>
+      <p><a class="chip source" href={licenceUrl}>{resource.data.licence}</a></p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </main>
+</Base>
