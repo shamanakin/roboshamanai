@@ -105,8 +105,34 @@ for (const file of htmlFiles) {
 const decoderPage = readFileSync(join(dist, "projects/decoder/index.html"), "utf8");
 if (decoderPage.includes(">DRAFT<") || decoderPage.includes(">Draft<")) fail("DECODER page is marked draft");
 if (!decoderPage.includes("https://decoder.roboshamanai.com")) fail("DECODER link missing");
-const fleet = readFileSync(join(dist, "projects/the-fleet/index.html"), "utf8");
-if (!fleet.includes("DRAFT")) fail("fleet draft label missing");
+
+const banned = [
+  ["Hearth", /\bhearth\b/i],
+  ["KIDFORGE", /\bkidforge\b/i],
+  ["BONES", /\bbones\b/i],
+  ["Door", /(?:\bDoor\b|(?:^|[/\\])door\.md\b|\/projects\/door\b)/],
+  ["NEXUS", /\bnexus\b/i],
+  ["JUNO", /\bjuno\b/i],
+  ["MANA", /\bmana\b/i],
+  ["INKWELL", /\binkwell\b/i],
+  ["Game Genie", /game[\s_-]+genie/i],
+];
+const scanRoots = [join(root, "src"), join(root, "public"), dist];
+const scanFiles = [
+  ...scanRoots.flatMap((dir) => walk(dir)),
+  join(root, "README.md"),
+  join(root, "LICENSE"),
+  join(root, "LICENSE-CONTENT.md"),
+];
+const skipExt = new Set([".woff2", ".webp", ".png", ".ico", ".jpg", ".jpeg", ".gif"]);
+for (const file of scanFiles) {
+  if (!existsSync(file) || statSync(file).isDirectory()) continue;
+  if (skipExt.has(file.slice(file.lastIndexOf(".")).toLowerCase())) continue;
+  const text = `${file.slice(root.length)}\n${readFileSync(file, "utf8")}`;
+  for (const [label, re] of banned) {
+    if (re.test(text)) fail(`private name ${label} in ${file}`);
+  }
+}
 
 function headings(file) {
   return readFileSync(file, "utf8")

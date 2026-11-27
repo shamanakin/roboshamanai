@@ -1,6 +1,6 @@
 ---
 title: English-as-code
-summary: "A family of markdown runtimes for AI: circuits, inkwell, InfoHunter, DecodeDev, firmware, autonozombie, cortex-reasoning, and nexus-template. Files as memory, prose as program."
+summary: "Markdown runtimes for AI. Files as memory, prose as program. Individual repositories are not linked from this page yet."
 state: source
 kind: tools
 year: "2025–26"
@@ -20,7 +20,7 @@ changelog:
 
 ## Why
 
-The seed list groups these as one family. This page does not yet point at individual repositories.
+This page is the public slot for that work. It does not yet point at individual repositories.
 
 ## How
 
