@@ -1,0 +1,116 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { kindLabel, stateLabel, absolute } from "../../data/site";
+import { graph } from "../../lib/jsonld";
+import { getProjects, getRelatedResearch, projectPath } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const related = await getRelatedResearch(project.data.relatedResearch);
+const path = projectPath(project.id);
+const tryUrl = project.data.tryUrl;
+const elsewhere = project.data.elsewhereUrl && project.data.elsewhereUrl !== tryUrl ? project.data.elsewhereUrl : undefined;
+const description = project.data.summary;
+---
+
+<Base
+  title={project.data.title}
+  description={description}
+  path={path}
+  jsonLd={graph({
+    "@type": "CreativeWork",
+    name: project.data.title,
+    description,
+    url: absolute(path),
+    creativeWorkStatus: project.data.draft ? "Draft" : "Published",
+  })}
+>
+  <main id="main" class="page wrap" tabindex="-1">
+    {project.data.draft && (
+      <p class="banner" role="note">
+        <strong>DRAFT</strong>
+        {project.data.held
+          ? " Held. This page is a marker until the product terms are settled. No client name is attached."
+          : project.data.confirm
+            ? " Waiting on confirmation before this project is described."
+            : " Public-safe placeholder from the seed list. Not a finished write-up."}
+      </p>
+    )}
+    <article>
+      <header class="page-head">
+        <p class="mono eyebrow">{kindLabel[project.data.kind]} · {project.data.year}</p>
+        <h1 class="project-title vt-target">{project.data.title}</h1>
+        <p class="lede">{project.data.summary}</p>
+        <div class="meta-row">
+          <span class={`chip ${project.data.state}`}>{stateLabel[project.data.state]}</span>
+          {project.data.draft && <span class="chip draft">Draft</span>}
+          <span class="mono">Role: {project.data.role}</span>
+          {project.data.stack.length > 0 && <span class="mono">Stack: {project.data.stack.join(", ")}</span>}
+          <span class="mono">Licence: {project.data.licence}</span>
+        </div>
+        <div class="actions">
+          {tryUrl && (
+            <a class="btn" href={tryUrl} rel="noopener noreferrer">
+              {project.data.tryLabel ?? "Try it"} ↗
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+          {project.data.sourceUrl && (
+            <a class="btn" href={project.data.sourceUrl} rel="noopener noreferrer">
+              Source ↗ <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+          {elsewhere && (
+            <a class="btn" href={elsewhere} rel="noopener noreferrer">
+              Elsewhere ↗ <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+        </div>
+      </header>
+      {project.data.media.length > 0 && (
+        <div class="grid">
+          {project.data.media.map((item) => (
+            <figure class="glass-static">
+              <img src={item.src} alt={item.alt} />
+            </figure>
+          ))}
+        </div>
+      )}
+      <div class="prose">
+        <Content />
+      </div>
+      <section aria-labelledby="related">
+        <h2 id="related">Related research</h2>
+        {related.length === 0 ? (
+          <p class="note">None linked yet.</p>
+        ) : (
+          <ul>
+            {related.map((paper) => (
+              <li><a href={`/research/${paper.id}/`}>{paper.data.idCode} {paper.data.title}</a>{paper.data.draft ? " (draft)" : ""}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+      <section aria-labelledby="atlas-link">
+        <h2 id="atlas-link">Atlas</h2>
+        <p class="note">The graph view is phase 2 and is not built. <a href="/atlas/">Atlas stub</a>.</p>
+      </section>
+      {project.data.changelog.length > 0 && (
+        <section aria-labelledby="log">
+          <h2 id="log">Changelog</h2>
+          <ul>
+            {project.data.changelog.map((item) => (
+              <li><span class="mono">{item.date}</span> — {item.note}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </article>
+  </main>
+</Base>

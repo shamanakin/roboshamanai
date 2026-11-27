@@ -1,0 +1,23 @@
+# Legacy v1/v2 URLs. Closest Open Lab page. 301.
+/portfolio.html          /projects/         301
+/portfolio               /projects/         301
+/work-maris.html         /projects/         301
+/work-maris              /projects/         301
+/privacy.html            /about/#privacy    301
+/privacy                 /about/#privacy    301
+/thank-you.html          /                  301
+/thank-you               /                  301
+/error.html              /                  301
+/error                   /                  301
+/contact.php             /about/#contact    301
+/contact.html            /about/#contact    301
+/contact                 /about/#contact    301
+/services                /about/#contact    301
+/services/               /about/#contact    301
+/pricing                 /about/#contact    301
+/pricing/                /about/#contact    301
+/faq                     /about/            301
+/faq/                    /about/            301
+/case-studies            /projects/         301
+/case-studies/           /projects/         301
+/case-studies/*          /projects/         301

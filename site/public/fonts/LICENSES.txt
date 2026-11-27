@@ -1,0 +1,17 @@
+Self-hosted subsets. No font CDN.
+
+Mona Sans — Copyright 2022 The Mona Sans Project Authors
+(https://github.com/github/mona-sans), with Reserved Font Name "Mona".
+SIL Open Font License 1.1. See OFL-MonaSans.txt.
+Subset keeps the weight and width axes. Latin and common punctuation.
+
+Newsreader — Copyright 2020 The Newsreader Project Authors
+(http://github.com/productiontype/Newsreader).
+SIL Open Font License 1.1. See OFL-Newsreader.txt.
+Subset keeps the weight axis. Optical size is pinned to 16 so three font
+files stay near 120 KB.
+
+JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors
+(https://github.com/JetBrains/JetBrainsMono).
+SIL Open Font License 1.1. See OFL-JetBrainsMono.txt.
+Static regular, Latin subset.

@@ -1,0 +1,36 @@
+---
+import { contact, links } from "../data/site";
+const open = contact.status === "open";
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <div><strong>Matthew Heake</strong> <span class="muted">· builder, researcher</span></div>
+      <div class="mono" id="contact">
+        <span class={`dot${open ? "" : " closed"}`} aria-hidden="true"></span>
+        Commissions &amp; consults: {contact.line}
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <span class="muted">· {open ? "open" : "closed"}</span>
+      </div>
+      <div class="mono">
+        <a href={links.github}>GitHub</a>
+        <span class="muted"> · </span>
+        <a href={links.x}>X</a>
+        <span class="muted"> · </span>
+        <a href="/research/feed.xml">RSS</a>
+        <span class="muted"> · </span>
+        <a href="/llms.txt">/llms.txt</a>
+      </div>
+    </div>
+    <p class="foot-note">
+      Code <a href={links.codeLicense}>MIT</a>.
+      Writing <a href={links.writingLicense}>CC BY 4.0</a> unless a page says otherwise.
+      <a href="/about/#privacy">Privacy</a>.
+      <a href="/now/">Now</a>.
+      <a href="/atlas/">Atlas (phase 2)</a>.
+      No tracking, no cookies.
+      <button class="pill" type="button" data-calm aria-pressed="false">Calm</button>
+    </p>
+  </div>
+</footer>

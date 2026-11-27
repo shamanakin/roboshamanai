@@ -1,0 +1,39 @@
+---
+import Base from "../../../../layouts/Base.astro";
+import PaperView from "../../../../components/PaperView.astro";
+import { absolute, links } from "../../../../data/site";
+import { graph } from "../../../../lib/jsonld";
+import { getResearch, versionPath } from "../../../../lib/content";
+
+export async function getStaticPaths() {
+  const papers = await getResearch();
+  return papers.flatMap((paper) =>
+    paper.data.changelog.map((change) => ({
+      params: { slug: paper.id, version: change.version },
+      props: { paper, version: change.version },
+    })),
+  );
+}
+
+const { paper, version } = Astro.props;
+const path = versionPath(paper.id, version);
+---
+
+<Base
+  title={`${paper.data.idCode} v${version}`}
+  description={paper.data.abstract}
+  path={path}
+  jsonLd={graph({
+    "@type": "ScholarlyArticle",
+    headline: paper.data.title,
+    version,
+    creativeWorkStatus: paper.data.draft ? "Draft" : "Published",
+    license: links.writingLicense,
+    url: absolute(path),
+    author: { "@id": "https://roboshamanai.com/#matthew" },
+  })}
+>
+  <main id="main" class="page" tabindex="-1">
+    <PaperView paper={paper} version={version} />
+  </main>
+</Base>

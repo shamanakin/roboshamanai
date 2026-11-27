@@ -1,0 +1,31 @@
+---
+import Base from "../../layouts/Base.astro";
+import { graph } from "../../lib/jsonld";
+import { getResources, resourcePath } from "../../lib/content";
+
+const resources = await getResources();
+const description = "Prompts, templates, and guides you can take. Each one carries a licence. Drafts are empty on purpose until the real files are dropped in.";
+---
+
+<Base title="Resources" description={description} path="/resources/" jsonLd={graph({ "@type": "CollectionPage", name: "Resources", url: "https://roboshamanai.com/resources/" })}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">Resources</p>
+      <h1>Take them</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <div class="grid">
+      {resources.map((resource) => (
+        <a class="card glass-static" href={resourcePath(resource.id)}>
+          <span>
+            <span class={`chip ${resource.data.state}`}>{resource.data.state}</span>
+            <span class="chip source">{resource.data.licence}</span>
+            {resource.data.draft && <span class="chip draft">Draft</span>}
+          </span>
+          <h2>{resource.data.title}</h2>
+          <p>{resource.data.summary}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</Base>

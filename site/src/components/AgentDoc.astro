@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  markdown: string;
+  human: string;
+  raw: string;
+}
+const { title, markdown, human, raw } = Astro.props;
+---
+
+<main id="main" class="page wrap" tabindex="-1">
+  <p class="banner agent-banner" role="note">
+    <strong>AGENT</strong>
+    Markdown mirror of the human page. <a href={human}>Human view</a>
+    · <a href={raw}>Raw markdown</a>
+  </p>
+  <h1 class="sr-only">{title}</h1>
+  <pre class="agent-doc">{markdown}</pre>
+</main>

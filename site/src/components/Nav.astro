@@ -1,0 +1,50 @@
+---
+import { agentHref } from "../data/site";
+
+interface Props {
+  mode?: "human" | "agent";
+  readerHref: string;
+}
+const { mode = "human", readerHref } = Astro.props;
+const agent = mode === "agent";
+const href = (path: string) => (agent ? agentHref(path) : path);
+---
+
+<nav class="site-nav glass" aria-label="Primary">
+  <a class="mark" href={href("/")}>
+    ROBOSHAMAN
+    <svg class="kite" viewBox="0 0 16 16" aria-hidden="true">
+      <path fill="currentColor" d="M8 1.2 12.4 8 8 14.8 3.6 8Z"></path>
+    </svg>
+    LAB
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href={href("/projects/")}>Projects</a>
+    <a class="nav-link" href={href("/research/")}>Research</a>
+    <a class="nav-link" href={href("/resources/")}>Resources</a>
+    <a class="nav-link" href={href("/about/")}>About</a>
+  </div>
+  <details class="nav-menu">
+    <summary>Menu</summary>
+    <div class="nav-panel glass-static">
+      <a href={href("/projects/")}>Projects</a>
+      <a href={href("/research/")}>Research</a>
+      <a href={href("/resources/")}>Resources</a>
+      <a href={href("/now/")}>Now</a>
+      <a href={href("/about/")}>About</a>
+      <a href={href("/atlas/")}>Atlas</a>
+    </div>
+  </details>
+  <div class="nav-tools">
+    <button class="pill" id="search-open" type="button" aria-haspopup="dialog" aria-controls="palette-panel">⌘K</button>
+    <a
+      class:list={["pill", { "is-on": agent }]}
+      href={readerHref}
+      title={agent ? "Switch to the human view" : "Switch to the agent view"}
+    >
+      <span class="long">HUMAN ⇄ AGENT</span>
+      <span class="short">H⇄A</span>
+    </a>
+    <button class="pill" type="button" data-calm aria-pressed="false" title="Calm mode: no blur, no motion">CALM</button>
+  </div>
+</nav>

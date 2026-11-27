@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+
+const description = "That page is not in the lab.";
+---
+
+<Base title="Not found" description={description} path="/404/" mirror="/agent/" noindex>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">404</p>
+      <h1>Nothing here</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <p><a class="btn" href="/">Back to the lab</a></p>
+  </main>
+</Base>

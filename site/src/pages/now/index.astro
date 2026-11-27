@@ -1,0 +1,35 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { formatDate } from "../../data/site";
+import { graph } from "../../lib/jsonld";
+import { getNow } from "../../lib/content";
+
+const entries = await getNow();
+const rendered = await Promise.all(
+  entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
+const description = "What I'm building or thinking about. A few lines, dated. Not a blog.";
+---
+
+<Base title="Now" description={description} path="/now/" jsonLd={graph()}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">Now</p>
+      <h1>This month</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <ol class="log-list">
+      {rendered.map(({ entry, Content }) => (
+        <li>
+          <p class="mono muted">{formatDate(entry.data.date)}</p>
+          <h2>{entry.data.title}</h2>
+          <ul>
+            {entry.data.lines.map((line) => <li>{line}</li>)}
+          </ul>
+          <div class="prose"><Content /></div>
+        </li>
+      ))}
+    </ol>
+  </main>
+</Base>

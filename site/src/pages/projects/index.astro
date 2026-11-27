@@ -1,0 +1,51 @@
+---
+import Base from "../../layouts/Base.astro";
+import { kindLabel, kinds, stateLabel, states } from "../../data/site";
+import { graph } from "../../lib/jsonld";
+import { getProjects, projectPath } from "../../lib/content";
+
+const projects = await getProjects();
+const description = "Things in the lab: tools, agents, research engines, music, games, and writing. Cards say whether they are live, hosted, source, lab, archived, or linked.";
+---
+
+<Base title="Projects" description={description} path="/projects/" jsonLd={graph({ "@type": "CollectionPage", name: "Projects", url: "https://roboshamanai.com/projects/" })}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">Projects</p>
+      <h1>The work</h1>
+      <p class="lede">{description} Draft cards are placeholders from the seed list, waiting to be trimmed.</p>
+    </header>
+    <div class="filters" data-filters>
+      <div role="group" aria-label="Filter by state">
+        <button type="button" data-key="state" data-value="all" aria-pressed="true">All</button>
+        {states.map((state) => (
+          <button type="button" data-key="state" data-value={state} aria-pressed="false">{stateLabel[state]}</button>
+        ))}
+      </div>
+      <div role="group" aria-label="Filter by kind">
+        <button type="button" data-key="kind" data-value="all" aria-pressed="true">All kinds</button>
+        {kinds.map((kind) => (
+          <button type="button" data-key="kind" data-value={kind} aria-pressed="false">{kindLabel[kind]}</button>
+        ))}
+      </div>
+    </div>
+    <p id="filter-status" class="mono muted" aria-live="polite"></p>
+    <p data-empty hidden>Nothing in this cut.</p>
+    <div class="grid" data-filter-grid>
+      {projects.map((project) => (
+        <a class="card glass-static" href={projectPath(project.id)} data-vt data-state={project.data.state} data-kind={project.data.kind}>
+          <span>
+            <span class={`chip ${project.data.state}`}>{stateLabel[project.data.state]}</span>
+            {project.data.draft && <span class="chip draft">Draft</span>}
+          </span>
+          <h2>{project.data.title}</h2>
+          <p>{project.data.summary}</p>
+          <div class="meta mono muted">
+            <span>{project.data.meta ?? kindLabel[project.data.kind]}</span>
+            <span>{project.data.year}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Base>

@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import { graph } from "../../lib/jsonld";
+
+const description = "Hosted demos live at /p/ when they are static and can run under this site's content security policy. None are published in this build.";
+---
+
+<Base title="Hosted demos" description={description} path="/p/" jsonLd={graph()}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">/p</p>
+      <h1>Hosted demos</h1>
+      <p class="lede">{description}</p>
+    </header>
+    <div class="prose">
+      <p>A hosted demo is a static page on this origin. Anything that needs a backend, or third-party code, gets its own subdomain instead of a place here.</p>
+      <p>There is no demo in this build. DECODER is not hosted here, and it is not placed in a frame.</p>
+    </div>
+  </main>
+</Base>

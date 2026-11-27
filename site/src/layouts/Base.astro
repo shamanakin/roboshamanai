@@ -1,0 +1,69 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Search from "../components/Search.astro";
+import { absolute, agentHref, humanHref, site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  mode?: "human" | "agent";
+  jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
+  mirror?: string;
+}
+const { title, description, path, mode = "human", jsonLd, noindex = false, mirror } = Astro.props;
+const fullTitle = title.includes(site.name) ? title : `${title} · ${site.name}`;
+const canonicalPath = path.split("#")[0];
+const humanPath = mode === "agent" ? humanHref(canonicalPath) : canonicalPath;
+const canonical = absolute(humanPath);
+const readerHref = mirror ?? (mode === "agent" ? humanPath : agentHref(humanPath));
+const og = absolute("/og.png");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#05060A" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16" />
+    <link rel="preload" href="/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs" />
+    <link rel="alternate" type="application/json" href="/index.json" title="JSON index" />
+    <link rel="alternate" type="application/rss+xml" href="/research/feed.xml" title="Research" />
+    {mode === "human" && <link rel="alternate" href={absolute(agentHref(canonicalPath))} title="Agent view" />}
+    <script is:inline src="/boot.js"></script>
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <slot name="head" />
+  </head>
+  <body data-mode={mode}>
+    <a class="skip" href="#main">Skip to content</a>
+    <div id="site">
+      <Nav mode={mode} readerHref={readerHref} />
+      <slot />
+      <Footer />
+    </div>
+    <Search />
+    <script>
+      import "../scripts/shell.ts";
+    </script>
+  </body>
+</html>

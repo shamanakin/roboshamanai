@@ -1,0 +1,19 @@
+---
+import Base from "../../layouts/Base.astro";
+import AgentDoc from "../../components/AgentDoc.astro";
+import { agentDocs, type AgentDoc as Doc } from "../../lib/agent";
+
+export async function getStaticPaths() {
+  const docs = await agentDocs();
+  return docs
+    .filter((doc) => doc.path !== "")
+    .map((doc) => ({ params: { path: doc.path }, props: { doc } }));
+}
+
+const { doc } = Astro.props as { doc: Doc };
+const path = `/agent/${doc.path}/`;
+---
+
+<Base title={doc.title} description={`Agent view of ${doc.title}`} path={path} mode="agent">
+  <AgentDoc title={doc.title} markdown={doc.markdown} human={doc.human} raw={`/agent/${doc.path}.md`} />
+</Base>

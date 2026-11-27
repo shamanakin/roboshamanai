@@ -1,0 +1,55 @@
+---
+import Base from "../../layouts/Base.astro";
+import { authorshipLabel, decoder, tierLabel, tiers, trackLabel, tracks } from "../../data/site";
+import { graph } from "../../lib/jsonld";
+import { getResearch, researchPath } from "../../lib/content";
+
+const papers = await getResearch();
+const description = "The lab notebook. Each entry has an ID, a version, a confidence tier, an authorship mark, and a falsifier. Drafts are not findings.";
+---
+
+<Base title="Research" description={description} path="/research/" jsonLd={graph({ "@type": "CollectionPage", name: "Research", url: "https://roboshamanai.com/research/" })}>
+  <main id="main" class="page wrap" tabindex="-1">
+    <header class="page-head">
+      <p class="mono eyebrow">Research</p>
+      <h1>Lab notebook</h1>
+      <p class="lede">{description} The method is <a href="/research/method/">Convergent Decoding v1.0</a>.</p>
+      <div class="shelf" aria-label="Tracks">
+        {tracks.map((track) => <span>{trackLabel[track]}</span>)}
+        <a href={decoder.url} rel="noopener noreferrer">DECODER corpus ↗</a>
+      </div>
+      <p class="note">Essays stay on DECODER. This shelf only links out. Systems has no entry yet.</p>
+    </header>
+    <div class="filters" data-filters>
+      <div role="group" aria-label="Filter by tier">
+        <button type="button" data-key="tier" data-value="all" aria-pressed="true">All tiers</button>
+        {tiers.map((tier) => (
+          <button type="button" data-key="tier" data-value={tier} aria-pressed="false">{tierLabel[tier]}</button>
+        ))}
+      </div>
+      <div role="group" aria-label="Filter by track">
+        <button type="button" data-key="track" data-value="all" aria-pressed="true">All tracks</button>
+        {tracks.map((track) => (
+          <button type="button" data-key="track" data-value={track} aria-pressed="false">{trackLabel[track]}</button>
+        ))}
+      </div>
+    </div>
+    <p id="filter-status" class="mono muted" aria-live="polite"></p>
+    <p data-empty hidden>Nothing on this shelf yet.</p>
+    <div data-filter-grid>
+      {papers.map((paper) => (
+        <a class="paper" href={researchPath(paper.id)} data-tier={paper.data.tier} data-track={paper.data.track} data-state="na">
+          <span class="mono muted">{paper.data.idCode}<br />v{paper.data.version}</span>
+          <span>
+            <h2>{paper.data.title}</h2>
+            <p>{paper.data.abstract}</p>
+          </span>
+          <span class="paper-tags">
+            {paper.data.draft && <span class="chip draft">Draft</span>}
+            <span class={`chip tier-${paper.data.tier}`}>{tierLabel[paper.data.tier]} · {authorshipLabel[paper.data.authorship]}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Base>
