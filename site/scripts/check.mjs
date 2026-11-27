@@ -92,6 +92,16 @@ for (const file of htmlFiles) {
   }
 }
 
+for (const file of htmlFiles) {
+  const rel = file.slice(dist.length).replace(/\\/g, "/");
+  const page = rel.endsWith("/index.html") ? rel.slice(0, -"index.html".length) : rel;
+  const html = readFileSync(file, "utf8");
+  if (!html.includes('data-mode="agent"')) continue;
+  const toggle = html.match(/<a class="pill is-on" href="([^"]+)" title="Switch to the human view">/);
+  if (!toggle) fail(`agent page ${page} has no human toggle`);
+  else if (toggle[1] === page || toggle[1].startsWith("/agent")) fail(`agent toggle on ${page} points at ${toggle[1]}`);
+}
+
 const decoderPage = readFileSync(join(dist, "projects/decoder/index.html"), "utf8");
 if (decoderPage.includes(">DRAFT<") || decoderPage.includes(">Draft<")) fail("DECODER page is marked draft");
 if (!decoderPage.includes("https://decoder.roboshamanai.com")) fail("DECODER link missing");

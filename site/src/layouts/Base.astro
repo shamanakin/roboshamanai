@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import Search from "../components/Search.astro";
-import { absolute, agentHref, site } from "../data/site";
+import { absolute, agentHref, humanHref, site } from "../data/site";
 
 interface Props {
   title: string;
@@ -17,8 +17,9 @@ interface Props {
 const { title, description, path, mode = "human", jsonLd, noindex = false, mirror } = Astro.props;
 const fullTitle = title.includes(site.name) ? title : `${title} · ${site.name}`;
 const canonicalPath = path.split("#")[0];
-const canonical = absolute(canonicalPath);
-const readerHref = mode === "agent" ? path : (mirror ?? agentHref(path));
+const humanPath = mode === "agent" ? humanHref(canonicalPath) : canonicalPath;
+const canonical = absolute(humanPath);
+const readerHref = mirror ?? (mode === "agent" ? humanPath : agentHref(humanPath));
 const og = absolute("/og.png");
 ---
 
